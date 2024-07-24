@@ -1,10 +1,4 @@
-import {
-	ClerkProvider,
-	SignInButton,
-	SignedIn,
-	SignedOut,
-	UserButton,
-} from "@clerk/nextjs";
+import { ClerkProvider } from "@clerk/nextjs";
 
 import type { Metadata } from "next";
 import { Cabin } from "next/font/google";
@@ -14,9 +8,9 @@ import { dark } from "@clerk/themes";
 const inter = Cabin({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-	title: "Blink Chats - Empower Your Chats with Peoples",
+	title: "Dashboard | Nexus",
 	description:
-		"Blink is a chatting app where users can chat with each other and share their thoughts with anyone.",
+		"This is the Dashboard of Nexus this is only mangaed and accessible by admins only.",
 };
 
 export default function RootLayout({

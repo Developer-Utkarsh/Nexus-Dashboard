@@ -9,8 +9,8 @@ export default function Home() {
 					<Image
 						src={"/nexus.png"}
 						alt='logo'
-						width={72}
-						height={72}
+						width={36}
+						height={36}
 					/>
 				</div>
 				<SignedIn>
