@@ -71,7 +71,7 @@ export default function SignUP() {
 									className='lg:hidden rounded-full'
 								/>
 								<div className='mt-5 space-y-2'>
-									<h3 className='text-gray-200 text-3xl font-semibold tracking-tighter sm:text-4xl'>
+									<h3 className='text-gray-200 text-3xl font-medium tracking-tighter sm:text-4xl'>
 										Sign up - Start journey
 									</h3>
 									<p className='text-gray-400'>
@@ -91,7 +91,6 @@ export default function SignUP() {
 								<Clerk.Connection
 									name='google'
 									className='group flex transform-gpu [border:1px_solid_rgba(255,255,255,.1)] [box-shadow:0_-20px_80px_-20px_#8686f01f_inset] border-white/10 items-center justify-center py-5 border rounded-lg hover:bg-transparent/50 duration-150 active:bg-transparent/50 gap-4 text-zinc-100'
-									
 								>
 									<svg
 										className={cn(

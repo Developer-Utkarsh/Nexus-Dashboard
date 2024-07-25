@@ -14,7 +14,7 @@ export default function Home() {
 					/>
 				</div>
 				<SignedIn>
-					<UserButton />
+					<UserButton afterSignOutUrl='/sign-in' />
 				</SignedIn>
 			</div>
 		</main>
