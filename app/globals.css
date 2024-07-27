@@ -71,13 +71,24 @@
 .loader {
   width: 16px;
   height: 16px;
-  border: 2px solid #FFF;
+  border: 2px solid #dcdcdc;
   border-bottom-color: transparent;
   border-radius: 50%;
   display: inline-block;
   box-sizing: border-box;
   animation: rotation 1s linear infinite;
   margin-top: 4px;
+}
+.loader-lg {
+  width: 56px;
+  height: 56px;
+  border: 5px solid #dcdcdc;
+  border-bottom-color: transparent;
+  border-radius: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+  margin-top: 0px;
 }
 
 @keyframes rotation {

@@ -1,7 +1,7 @@
 import React from "react";
 
-const Loader = () => {
-	return <span className='loader'></span>;
+const Loader = ({ className }: { className?: string }) => {
+	return <span className={` ${className ? "loader-lg" : "loader"}`}></span>;
 };
 
 export default Loader;
