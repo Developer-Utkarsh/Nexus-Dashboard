@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, Suspense } from "react";
+import { motion } from "framer-motion";
 import dynamic from "next/dynamic";
 import * as Clerk from "@clerk/elements/common";
 import * as SignUp from "@clerk/elements/sign-up";
@@ -17,6 +18,19 @@ const LoaderWrapper = () => (
 		<Loader className='loader-lg' />
 	</div>
 );
+const fadeUpVariants = {
+	hidden: { opacity: 0, y: 30, scale: 0.95 },
+	visible: {
+		opacity: 1,
+		y: 0,
+		scale: 1,
+		transition: {
+			duration: 0.8,
+			ease: [0.6, -0.05, 0.01, 0.99],
+			staggerChildren: 0.2,
+		},
+	},
+};
 
 // Dynamically import SignUp.Root with SSR disabled
 const DynamicSignUpRoot = dynamic(
@@ -36,7 +50,12 @@ export default function SignUP() {
 			{/* Left side content */}
 			<div className='relative flex-1 hidden items-center justify-center min-h-screen lg:flex'>
 				{/* ... (left side content remains unchanged) ... */}
-				<div className='relative z-10 w-full max-w-lg'>
+				<motion.div
+					className='relative z-10 w-full max-w-lg'
+					initial='hidden'
+					animate='visible'
+					variants={fadeUpVariants}
+				>
 					<Image
 						src='/nexus.png'
 						alt='logo'
@@ -45,15 +64,26 @@ export default function SignUP() {
 						className='rounded-full'
 					/>
 					<div className='mt-10 space-y-3'>
-						<h3 className='text-white text-3xl md:text-4xl lg:text-5xl font-normal font-geist tracking-tighter'>
+						<motion.h3
+							className='text-white text-3xl md:text-4xl lg:text-5xl font-normal font-geist tracking-tighter'
+							variants={fadeUpVariants}
+						>
 							Conduct Meetings with Nexus
-						</h3>
-						<Separator className='h-px bg-white/20 w-[120px] mr-auto' />
-						<p className='text-gray-300 text-md md:text-xl font-geist tracking-tight'>
+						</motion.h3>
+						<motion.div
+							className='h-px bg-white/20 w-[120px] mr-auto'
+							variants={fadeUpVariants}
+						>
+							<Separator />
+						</motion.div>
+						<motion.p
+							className='text-gray-300 text-md md:text-xl font-geist tracking-tight'
+							variants={fadeUpVariants}
+						>
 							Create an account and get access to all features.
-						</p>
+						</motion.p>
 					</div>
-				</div>
+				</motion.div>
 				<div className='absolute inset-0 my-auto h-full'>
 					<div className='absolute inset-0 opacity-15 w-full bg-transparent bg-[linear-gradient(to_right,#f0f0f0_1px,transparent_1px),linear-gradient(to_bottom,#f0f0f0_1px,transparent_1px)] bg-[size:6rem_4rem] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_110%)]'></div>
 					<img
@@ -81,7 +111,12 @@ export default function SignUP() {
 							<SignUp.Root>
 								<SignUp.Step name='start'>
 									{/* ... (start step content remains unchanged) ... */}
-									<div className='relative'>
+									<motion.div
+										className='relative'
+										initial='hidden'
+										animate='visible'
+										variants={fadeUpVariants}
+									>
 										<Image
 											src='/nexus.png'
 											alt='logo'
@@ -90,10 +125,16 @@ export default function SignUP() {
 											className='lg:hidden rounded-full'
 										/>
 										<div className='mt-5 space-y-2'>
-											<h3 className='text-gray-200 text-3xl font-medium tracking-tighter sm:text-4xl'>
+											<motion.h3
+												className='text-gray-200 text-3xl font-medium tracking-tighter sm:text-4xl'
+												variants={fadeUpVariants}
+											>
 												Sign up - Start journey
-											</h3>
-											<p className='text-gray-400'>
+											</motion.h3>
+											<motion.p
+												className='text-gray-400'
+												variants={fadeUpVariants}
+											>
 												Already have an account?{" "}
 												<button
 													className='font-medium text-indigo-600 hover:text-indigo-500'
@@ -103,10 +144,15 @@ export default function SignUP() {
 												>
 													Log in
 												</button>
-											</p>
+											</motion.p>
 										</div>
-									</div>
-									<div className='mt-8 grid grid-cols-2 gap-x-3'>
+									</motion.div>
+									<motion.div
+										className='mt-8 grid grid-cols-2 gap-x-3'
+										initial='hidden'
+										animate='visible'
+										variants={fadeUpVariants}
+									>
 										<Clerk.Loading>
 											{(isLoading) => {
 												return (
@@ -262,25 +308,68 @@ export default function SignUP() {
 												);
 											}}
 										</Clerk.Loading>
-									</div>
+									</motion.div>
 									<Separator className='h-px bg-white/20 my-8' />
-									<Clerk.Loading>
-										{(isLoading) => {
-											return (
-												<div
-													className={`${
-														isLoading &&
-														"opacity-60 cursor-wait"
-													}`}
-												>
-													<div className='space-y-5'>
-														<div className='grid grid-cols-2 gap-2'>
-															<Clerk.Field name='firstName'>
+									<motion.div
+										initial='hidden'
+										animate='visible'
+										variants={fadeUpVariants}
+									>
+										<Clerk.Loading>
+											{(isLoading) => {
+												return (
+													<div
+														className={`${
+															isLoading &&
+															"opacity-60 cursor-wait"
+														}`}
+													>
+														<div className='space-y-5'>
+															<div className='grid grid-cols-2 gap-2'>
+																<Clerk.Field name='firstName'>
+																	<label className='font-medium text-gray-100/70 font-geist'>
+																		First
+																		Name
+																	</label>
+																	<Clerk.Input
+																		type='text'
+																		required
+																		asChild
+																	>
+																		<Input
+																			type='text'
+																			required
+																			className='w-full mt-2 px-3 py-5 text-gray-100 bg-transparent outline-none border focus:border-purple-600 shadow-sm rounded-lg'
+																		/>
+																	</Clerk.Input>
+
+																	<Clerk.FieldError className='mt-2 block text-xs text-red-600' />
+																</Clerk.Field>
+																<Clerk.Field name='lastName'>
+																	<label className='font-medium text-gray-100/70 font-geist'>
+																		Last
+																		Name
+																	</label>
+																	<Clerk.Input
+																		type='text'
+																		required
+																		asChild
+																	>
+																		<Input
+																			type='text'
+																			required
+																			className='w-full mt-2 px-3 py-5 text-gray-100 bg-transparent outline-none border focus:border-purple-600 shadow-sm rounded-lg'
+																		/>
+																	</Clerk.Input>
+																	<Clerk.FieldError className='mt-2 block text-xs text-red-600' />
+																</Clerk.Field>
+															</div>
+															<Clerk.Field name='emailAddress'>
 																<label className='font-medium text-gray-100/70 font-geist'>
-																	First Name
+																	Email
 																</label>
 																<Clerk.Input
-																	type='text'
+																	type='email'
 																	required
 																	asChild
 																>
@@ -290,12 +379,11 @@ export default function SignUP() {
 																		className='w-full mt-2 px-3 py-5 text-gray-100 bg-transparent outline-none border focus:border-purple-600 shadow-sm rounded-lg'
 																	/>
 																</Clerk.Input>
-
 																<Clerk.FieldError className='mt-2 block text-xs text-red-600' />
 															</Clerk.Field>
-															<Clerk.Field name='lastName'>
+															<Clerk.Field name='password'>
 																<label className='font-medium text-gray-100/70 font-geist'>
-																	Last Name
+																	Password
 																</label>
 																<Clerk.Input
 																	type='text'
@@ -303,7 +391,7 @@ export default function SignUP() {
 																	asChild
 																>
 																	<Input
-																		type='text'
+																		type='password'
 																		required
 																		className='w-full mt-2 px-3 py-5 text-gray-100 bg-transparent outline-none border focus:border-purple-600 shadow-sm rounded-lg'
 																	/>
@@ -311,67 +399,44 @@ export default function SignUP() {
 																<Clerk.FieldError className='mt-2 block text-xs text-red-600' />
 															</Clerk.Field>
 														</div>
-														<Clerk.Field name='emailAddress'>
-															<label className='font-medium text-gray-100/70 font-geist'>
-																Email
-															</label>
-															<Clerk.Input
-																type='email'
-																required
-																asChild
-															>
-																<Input
-																	type='text'
-																	required
-																	className='w-full mt-2 px-3 py-5 text-gray-100 bg-transparent outline-none border focus:border-purple-600 shadow-sm rounded-lg'
-																/>
-															</Clerk.Input>
-															<Clerk.FieldError className='mt-2 block text-xs text-red-600' />
-														</Clerk.Field>
-														<Clerk.Field name='password'>
-															<label className='font-medium text-gray-100/70 font-geist'>
-																Password
-															</label>
-															<Clerk.Input
-																type='text'
-																required
-																asChild
-															>
-																<Input
-																	type='password'
-																	required
-																	className='w-full mt-2 px-3 py-5 text-gray-100 bg-transparent outline-none border focus:border-purple-600 shadow-sm rounded-lg'
-																/>
-															</Clerk.Input>
-															<Clerk.FieldError className='mt-2 block text-xs text-red-600' />
-														</Clerk.Field>
 													</div>
-												</div>
-											);
-										}}
-									</Clerk.Loading>
-									<SignUp.Action
-										submit
-										className='w-full mt-8 font-geist tracking-tighter text-center rounded-md bg-gradient-to-br from-blue-400 to-blue-700 px-4 py-2 text-lg text-zinc-50 ring-2 ring-blue-500/50 ring-offset-2 ring-offset-zinc-950 transition-all hover:scale-[1.02] hover:ring-transparent active:scale-[0.98] active:ring-blue-500/70 flex items-center justify-center gap-0'
-									>
-										Create account
-										<Clerk.Loading>
-											{(isLoading) =>
-												isLoading ? (
-													<div className='ml-4'>
-														<Loader />
-													</div>
-												) : (
-													<ChevronRight className='inline-flex justify-center items-center w-4 h-4 ml-2 group-hover:translate-x-1 duration-300' />
-												)
-											}
+												);
+											}}
 										</Clerk.Loading>
-									</SignUp.Action>
+									</motion.div>
+									<motion.div
+										initial='hidden'
+										animate='visible'
+										variants={fadeUpVariants}
+									>
+										<SignUp.Action
+											submit
+											className='w-full mt-8 font-geist tracking-tighter text-center rounded-md bg-gradient-to-br from-blue-400 to-blue-700 px-4 py-2 text-lg text-zinc-50 ring-2 ring-blue-500/50 ring-offset-2 ring-offset-zinc-950 transition-all hover:scale-[1.02] hover:ring-transparent active:scale-[0.98] active:ring-blue-500/70 flex items-center justify-center gap-0'
+										>
+											Create account
+											<Clerk.Loading>
+												{(isLoading) =>
+													isLoading ? (
+														<div className='ml-4'>
+															<Loader />
+														</div>
+													) : (
+														<ChevronRight className='inline-flex justify-center items-center w-4 h-4 ml-2 group-hover:translate-x-1 duration-300' />
+													)
+												}
+											</Clerk.Loading>
+										</SignUp.Action>
+									</motion.div>
 								</SignUp.Step>
 
 								<SignUp.Step name='verifications'>
 									<SignUp.Strategy name='email_code'>
-										<div className='text-center'>
+										<motion.div
+											className='text-center'
+											initial='hidden'
+											animate='visible'
+											variants={fadeUpVariants}
+										>
 											<Image
 												src='/nexus.png'
 												alt='logo'
@@ -387,8 +452,13 @@ export default function SignUP() {
 												to your email. Please enter it
 												below.
 											</p>
-										</div>
-										<div className='mt-8'>
+										</motion.div>
+										<motion.div
+											className='mt-8'
+											initial='hidden'
+											animate='visible'
+											variants={fadeUpVariants}
+										>
 											<Clerk.Loading>
 												{(isLoading) => {
 													return (
@@ -442,29 +512,40 @@ export default function SignUP() {
 													);
 												}}
 											</Clerk.Loading>
-										</div>
-										<SignUp.Action
-											submit
-											className='w-full mt-8 font-geist tracking-tighter text-center rounded-md bg-gradient-to-br from-blue-400 to-blue-700 px-4 py-2 text-lg text-zinc-50 ring-2 ring-blue-500/50 ring-offset-2 ring-offset-zinc-950 transition-all hover:scale-[1.02] hover:ring-transparent active:scale-[0.98] active:ring-blue-500/70 flex items-center justify-center gap-0'
+										</motion.div>
+										<motion.div
+											initial='hidden'
+											animate='visible'
+											variants={fadeUpVariants}
 										>
-											Verify Email
-											<Clerk.Loading>
-												{(isLoading) =>
-													isLoading ? (
-														<div className='ml-4'>
-															<Loader />
-														</div>
-													) : (
-														<ChevronRight className='inline-flex justify-center items-center w-4 h-4 ml-2 group-hover:translate-x-1 duration-300' />
-													)
-												}
-											</Clerk.Loading>
-										</SignUp.Action>
+											<SignUp.Action
+												submit
+												className='w-full mt-8 font-geist tracking-tighter text-center rounded-md bg-gradient-to-br from-blue-400 to-blue-700 px-4 py-2 text-lg text-zinc-50 ring-2 ring-blue-500/50 ring-offset-2 ring-offset-zinc-950 transition-all hover:scale-[1.02] hover:ring-transparent active:scale-[0.98] active:ring-blue-500/70 flex items-center justify-center gap-0'
+											>
+												Verify Email
+												<Clerk.Loading>
+													{(isLoading) =>
+														isLoading ? (
+															<div className='ml-4'>
+																<Loader />
+															</div>
+														) : (
+															<ChevronRight className='inline-flex justify-center items-center w-4 h-4 ml-2 group-hover:translate-x-1 duration-300' />
+														)
+													}
+												</Clerk.Loading>
+											</SignUp.Action>
+										</motion.div>
 									</SignUp.Strategy>
 								</SignUp.Step>
 								<SignUp.Step name='continue'>
 									{/* ... (continue step content remains unchanged) ... */}
-									<div className='relative'>
+									<motion.div
+										className='relative'
+										initial='hidden'
+										animate='visible'
+										variants={fadeUpVariants}
+									>
 										<Image
 											src='/nexus.png'
 											alt='logo'
@@ -473,10 +554,16 @@ export default function SignUP() {
 											className='lg:hidden rounded-full'
 										/>
 										<div className='mt-5 space-y-2'>
-											<h3 className='text-gray-200 text-3xl font-semibold tracking-loose sm:text-4xl'>
+											<motion.h3
+												className='text-gray-200 text-3xl font-semibold tracking-loose sm:text-4xl'
+												variants={fadeUpVariants}
+											>
 												Sign up - Username
-											</h3>
-											<p className='text-gray-400'>
+											</motion.h3>
+											<motion.p
+												className='text-gray-400'
+												variants={fadeUpVariants}
+											>
 												Already have an account?{" "}
 												<button
 													className='font-medium text-indigo-600 hover:text-indigo-500'
@@ -486,11 +573,16 @@ export default function SignUP() {
 												>
 													Log in
 												</button>
-											</p>
+											</motion.p>
 										</div>
-									</div>
+									</motion.div>
 									<Separator className='h-px bg-white/20 my-8' />
-									<div className='space-y-5'>
+									<motion.div
+										className='space-y-5'
+										initial='hidden'
+										animate='visible'
+										variants={fadeUpVariants}
+									>
 										<Clerk.Loading>
 											{(isLoading) => {
 												return (
@@ -521,24 +613,30 @@ export default function SignUP() {
 												);
 											}}
 										</Clerk.Loading>
-									</div>
-									<SignUp.Action
-										submit
-										className='w-full mt-8 font-geist tracking-tighter text-center rounded-md bg-gradient-to-br from-blue-400 to-blue-700 px-4 py-2 text-lg text-zinc-50 ring-2 ring-blue-500/50 ring-offset-2 ring-offset-zinc-950 transition-all hover:scale-[1.02] hover:ring-transparent active:scale-[0.98] active:ring-blue-500/70 flex items-center justify-center gap-0'
+									</motion.div>
+									<motion.div
+										initial='hidden'
+										animate='visible'
+										variants={fadeUpVariants}
 									>
-										Continue
-										<Clerk.Loading>
-											{(isLoading) =>
-												isLoading ? (
-													<div className='ml-4'>
-														<Loader />
-													</div>
-												) : (
-													<ChevronRight className='inline-flex justify-center items-center w-4 h-4 ml-2 group-hover:translate-x-1 duration-300' />
-												)
-											}
-										</Clerk.Loading>
-									</SignUp.Action>
+										<SignUp.Action
+											submit
+											className='w-full mt-8 font-geist tracking-tighter text-center rounded-md bg-gradient-to-br from-blue-400 to-blue-700 px-4 py-2 text-lg text-zinc-50 ring-2 ring-blue-500/50 ring-offset-2 ring-offset-zinc-950 transition-all hover:scale-[1.02] hover:ring-transparent active:scale-[0.98] active:ring-blue-500/70 flex items-center justify-center gap-0'
+										>
+											Continue
+											<Clerk.Loading>
+												{(isLoading) =>
+													isLoading ? (
+														<div className='ml-4'>
+															<Loader />
+														</div>
+													) : (
+														<ChevronRight className='inline-flex justify-center items-center w-4 h-4 ml-2 group-hover:translate-x-1 duration-300' />
+													)
+												}
+											</Clerk.Loading>
+										</SignUp.Action>
+									</motion.div>
 								</SignUp.Step>
 							</SignUp.Root>
 						</DynamicSignUpRoot>
