@@ -79,7 +79,8 @@ export default function CombinedSignIn() {
 																className='text-gray-200 text-2xl font-normal sm:text-3xl tracking-tighter font-geist'
 																variants={fadeUp}
 															>
-																Log in to your account
+																<span className='font-michroma'>Log in</span> to
+																your account
 															</motion.h3>
 															<motion.p
 																className='text-gray-400'
@@ -303,7 +304,8 @@ export default function CombinedSignIn() {
 																	className='text-gray-200 text-2xl font-normal sm:text-3xl tracking-tighter font-geist'
 																	variants={fadeUp}
 																>
-																	Log in to your account
+																	<span className='font-michroma'>Log in</span>{" "}
+																	to your account
 																</motion.h3>
 																<motion.p
 																	className='text-gray-400'

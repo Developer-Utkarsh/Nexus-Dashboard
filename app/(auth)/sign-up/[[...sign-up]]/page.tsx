@@ -68,10 +68,10 @@ export default function SignUP() {
 							className='text-white text-3xl md:text-4xl lg:text-5xl font-normal font-geist tracking-tighter'
 							variants={fadeUpVariants}
 						>
-							Conduct Meetings with Nexus
+							Conduct Meetings with <span className='font-michroma'>Nexus</span>
 						</motion.h3>
 						<motion.div
-							className='h-px bg-white/20 w-[120px] mr-auto'
+							className='h-px bg-white/20 w-[200px] mr-auto'
 							variants={fadeUpVariants}
 						>
 							<Separator />
@@ -129,7 +129,8 @@ export default function SignUP() {
 												className='text-gray-200 text-3xl font-medium tracking-tighter sm:text-4xl'
 												variants={fadeUpVariants}
 											>
-												Sign up - Start journey
+												<span className='font-michroma'>Sign up</span> - Start
+												journey
 											</motion.h3>
 											<motion.p
 												className='text-gray-400'
@@ -138,9 +139,7 @@ export default function SignUP() {
 												Already have an account?{" "}
 												<button
 													className='font-medium text-indigo-600 hover:text-indigo-500'
-													onClick={() =>
-														router.push("/sign-in")
-													}
+													onClick={() => router.push("/sign-in")}
 												>
 													Log in
 												</button>
@@ -159,8 +158,7 @@ export default function SignUP() {
 													<Clerk.Connection
 														name='google'
 														className={`selection:group flex transform-gpu [border:1px_solid_rgba(255,255,255,.1)] [box-shadow:0_-20px_80px_-20px_#8686f01f_inset] border-white/10 items-center justify-center py-5 border rounded-lg hover:bg-transparent/50 duration-150 active:bg-transparent/50 gap-4 text-zinc-100 ${
-															isLoading &&
-															"opacity-60 cursor-wait"
+															isLoading && "opacity-60 cursor-wait"
 														}`}
 													>
 														<svg
@@ -195,11 +193,7 @@ export default function SignUP() {
 															</g>
 															<defs>
 																<clipPath id='clip0_17_40'>
-																	<rect
-																		width='48'
-																		height='48'
-																		fill='white'
-																	/>
+																	<rect width='48' height='48' fill='white' />
 																</clipPath>
 															</defs>
 														</svg>
@@ -280,11 +274,7 @@ export default function SignUP() {
 															</g>
 															<defs>
 																<clipPath id='clip0_910_21'>
-																	<rect
-																		width='48'
-																		height='48'
-																		fill='white'
-																	/>
+																	<rect width='48' height='48' fill='white' />
 																</clipPath>
 															</defs>
 														</svg>
@@ -320,22 +310,16 @@ export default function SignUP() {
 												return (
 													<div
 														className={`${
-															isLoading &&
-															"opacity-60 cursor-wait"
+															isLoading && "opacity-60 cursor-wait"
 														}`}
 													>
 														<div className='space-y-5'>
 															<div className='grid grid-cols-2 gap-2'>
 																<Clerk.Field name='firstName'>
 																	<label className='font-medium text-gray-100/70 font-geist'>
-																		First
-																		Name
+																		First Name
 																	</label>
-																	<Clerk.Input
-																		type='text'
-																		required
-																		asChild
-																	>
+																	<Clerk.Input type='text' required asChild>
 																		<Input
 																			type='text'
 																			required
@@ -347,14 +331,9 @@ export default function SignUP() {
 																</Clerk.Field>
 																<Clerk.Field name='lastName'>
 																	<label className='font-medium text-gray-100/70 font-geist'>
-																		Last
-																		Name
+																		Last Name
 																	</label>
-																	<Clerk.Input
-																		type='text'
-																		required
-																		asChild
-																	>
+																	<Clerk.Input type='text' required asChild>
 																		<Input
 																			type='text'
 																			required
@@ -368,11 +347,7 @@ export default function SignUP() {
 																<label className='font-medium text-gray-100/70 font-geist'>
 																	Email
 																</label>
-																<Clerk.Input
-																	type='email'
-																	required
-																	asChild
-																>
+																<Clerk.Input type='email' required asChild>
 																	<Input
 																		type='text'
 																		required
@@ -385,11 +360,7 @@ export default function SignUP() {
 																<label className='font-medium text-gray-100/70 font-geist'>
 																	Password
 																</label>
-																<Clerk.Input
-																	type='text'
-																	required
-																	asChild
-																>
+																<Clerk.Input type='text' required asChild>
 																	<Input
 																		type='password'
 																		required
@@ -448,9 +419,8 @@ export default function SignUP() {
 												Verify your email
 											</h1>
 											<p className='mt-2 text-sm text-gray-400'>
-												We've sent a verification code
-												to your email. Please enter it
-												below.
+												We've sent a verification code to your email. Please
+												enter it below.
 											</p>
 										</motion.div>
 										<motion.div
@@ -464,8 +434,7 @@ export default function SignUP() {
 													return (
 														<div
 															className={`${
-																isLoading &&
-																"opacity-60 cursor-wait"
+																isLoading && "opacity-60 cursor-wait"
 															}`}
 														>
 															<Clerk.Field name='code'>
@@ -473,31 +442,21 @@ export default function SignUP() {
 																	type='otp'
 																	className='flex justify-center has-[:disabled]:opacity-50'
 																	autoSubmit
-																	render={({
-																		value,
-																		status,
-																	}) => {
+																	render={({ value, status }) => {
 																		return (
 																			<div
-																				data-status={
-																					status
-																				}
+																				data-status={status}
 																				className={cn(
 																					"relative flex size-16 items-center justify-center border-y border-r border-input text-2xl transition-all first:rounded-l-md first:border-l last:rounded-r-md text-white",
 																					{
 																						"z-10 ring-2 ring-ring ring-offset-background":
-																							status ===
-																								"cursor" ||
-																							status ===
-																								"selected",
+																							status === "cursor" ||
+																							status === "selected",
 																					},
 																				)}
 																			>
-																				{
-																					value
-																				}
-																				{status ===
-																					"cursor" && (
+																				{value}
+																				{status === "cursor" && (
 																					<div className='pointer-events-none absolute inset-0 flex items-center justify-center'>
 																						<div className='animate-typing h-8 w-px bg-slate-100 duration-1000' />
 																					</div>
@@ -567,9 +526,7 @@ export default function SignUP() {
 												Already have an account?{" "}
 												<button
 													className='font-medium text-indigo-600 hover:text-indigo-500'
-													onClick={() =>
-														router.push("/sign-in")
-													}
+													onClick={() => router.push("/sign-in")}
 												>
 													Log in
 												</button>
@@ -588,19 +545,14 @@ export default function SignUP() {
 												return (
 													<div
 														className={`${
-															isLoading &&
-															"opacity-60 cursor-wait"
+															isLoading && "opacity-60 cursor-wait"
 														}`}
 													>
 														<Clerk.Field name='username'>
 															<label className='font-medium text-gray-100/70 font-geist'>
 																Username
 															</label>
-															<Clerk.Input
-																type='text'
-																required
-																asChild
-															>
+															<Clerk.Input type='text' required asChild>
 																<Input
 																	type='text'
 																	required

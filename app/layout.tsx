@@ -1,11 +1,14 @@
 import { ClerkProvider } from "@clerk/nextjs";
 
 import type { Metadata } from "next";
-import { Cabin } from "next/font/google";
+// import { Michroma } from "next/font/google";
+import { GeistSans } from "geist/font/sans";
+import { GeistMono } from "geist/font/mono";
+
 import "./globals.css";
 
 import { dark } from "@clerk/themes";
-const inter = Cabin({ subsets: ["latin"] });
+// const inter = Michroma({ subsets: ["latin"], weight: "400" });
 
 export const metadata: Metadata = {
 	title: "Dashboard | Nexus",
@@ -28,6 +31,12 @@ export default function RootLayout({
 					crossOrigin='anonymous'
 					referrerPolicy='no-referrer'
 				/>
+				<link rel='preconnect' href='https://fonts.googleapis.com' />
+				<link rel='preconnect' href='https://fonts.gstatic.com' />
+				<link
+					href='https://fonts.googleapis.com/css2?family=Michroma&display=swap'
+					rel='stylesheet'
+				/>
 			</head>
 
 			<ClerkProvider
@@ -43,7 +52,7 @@ export default function RootLayout({
 					baseTheme: dark,
 				}}
 			>
-				<body className={inter.className}>{children}</body>
+				<body className={GeistSans.className}>{children}</body>
 			</ClerkProvider>
 		</html>
 	);
