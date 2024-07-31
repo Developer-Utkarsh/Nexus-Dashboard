@@ -1,29 +1,60 @@
-"use client"
-import { SignedIn, UserButton } from "@clerk/nextjs";
-import Image from "next/image";
-import {useEffect} from "react"
+"use client";
+
+import { useState, useEffect } from "react";
+import { useUser } from "@clerk/nextjs";
+import axios from "axios";
+import Loader from "@/components/Loader";
+import NotAllowed from "@/components/NotAllowed";
+import Dashboard from "@/components/Home";
+import { devNull } from "os";
+
 export default function Home() {
+	const { user } = useUser();
+	const [loading, setLoading] = useState(true);
+	const [isAdmin, setIsAdmin] = useState(null);
+
 	useEffect(() => {
-		fetch("/api/")
-			.then((response) => response.json())
-			.then((data) => console.log(data))
-			.catch((error) => console.error(error));
-	}, []);
-	return (
-		<main className=' min-h-screen bg-[#000]'>
-			<div className='flex justify-between items-center px-8 py-3 w-full bg-[#0A0A0A] border-b border-gray-700 '>
-				<div>
-					<Image
-						src={"/nexus.png"}
-						alt='logo'
-						width={28}
-						height={28}
-					/>
-				</div>
-				<SignedIn>
-					<UserButton afterSignOutUrl='/sign-in' />
-				</SignedIn>
+		const checkAdminStatus = async () => {
+			if (user?.emailAddresses[0]?.emailAddress) {
+				try {
+					const response = await axios.post("/api/", {
+						email: user.emailAddresses[0].emailAddress,
+					});
+					setIsAdmin(response.data.exists);
+				} catch (error) {
+					console.error("Error checking admin status:", error);
+				} finally {
+					setLoading(false);
+				}
+			} else {
+				setLoading(false);
+			}
+		};
+
+		checkAdminStatus();
+	}, [user]);
+
+	console.log(isAdmin);
+
+	if (loading) {
+		return (
+			<div className='bg-black h-screen w-full flex justify-center items-center'>
+				<Loader className='loader-lg' />
 			</div>
-		</main>
+		);
+	}
+
+	return (
+		<div className='z-30 bg-black flex w-full h-screen justify-center items-center text-5xl text-white'>
+			{loading ? (
+				<Loader className='loader-lg' />
+			) : isAdmin === true ? (
+				<Dashboard />
+			) : isAdmin === false ? (
+				<NotAllowed />
+			) : (
+				<Loader className='loader-lg' />
+			)}
+		</div>
 	);
 }
