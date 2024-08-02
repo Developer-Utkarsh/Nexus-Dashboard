@@ -9,6 +9,15 @@ import { dark } from "@clerk/themes";
 import { GeistSans } from "geist/font/sans";
 import "./globals.css";
 
+import { createContext, useContext } from "react";
+
+// Create a context for the admin status
+const AdminContext = createContext<boolean | null>(null);
+
+export function useAdmin() {
+	return useContext(AdminContext);
+}
+
 export default function ClientLayout({
 	children,
 }: Readonly<{
@@ -79,7 +88,7 @@ function AdminCheck({ children }: { children: React.ReactNode }) {
 		checkAdminStatus();
 	}, [user]);
 
-	if (loading || isAdmin === null) {
+	if (loading) {
 		return (
 			<div className='bg-black h-screen w-full flex justify-center items-center'>
 				<Loader className='loader-lg' />
@@ -91,5 +100,7 @@ function AdminCheck({ children }: { children: React.ReactNode }) {
 		return <NotAllowed />;
 	}
 
-	return <>{children}</>;
+	return (
+		<AdminContext.Provider value={isAdmin}>{children}</AdminContext.Provider>
+	);
 }
