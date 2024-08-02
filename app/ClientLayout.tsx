@@ -79,7 +79,7 @@ function AdminCheck({ children }: { children: React.ReactNode }) {
 		checkAdminStatus();
 	}, [user]);
 
-	if (loading) {
+	if (loading || isAdmin === null) {
 		return (
 			<div className='bg-black h-screen w-full flex justify-center items-center'>
 				<Loader className='loader-lg' />
