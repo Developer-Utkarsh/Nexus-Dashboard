@@ -11,11 +11,12 @@ import {
   BreadcrumbSeparator
 } from "@/components/ui/breadcrumb";
 
-export default function Dashboard() {
+export default function AdminsPage() {
   return (
-    <ContentLayout title="Dashboard">
+    <ContentLayout title="Admins">
       <Breadcrumb>
         <BreadcrumbList>
+          
           <BreadcrumbItem>
             <BreadcrumbLink asChild>
               <Link href="/">Dashboard</Link>
@@ -23,7 +24,7 @@ export default function Dashboard() {
           </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem>
-            <BreadcrumbPage>Home</BreadcrumbPage>
+            <BreadcrumbPage>Admins</BreadcrumbPage>
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>

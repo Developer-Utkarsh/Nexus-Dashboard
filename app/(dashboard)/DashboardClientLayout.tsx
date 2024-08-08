@@ -7,10 +7,11 @@ import Loader from "@/components/Loader";
 import NotAllowed from "@/components/NotAllowed";
 import { dark } from "@clerk/themes";
 import { GeistSans } from "geist/font/sans";
-import "./globals.css";
+import "../globals.css";
 import { ThemeProvider } from "@/providers/theme-provider";
 
 import { createContext, useContext } from "react";
+import AdminPanelLayout from "@/components/admin-panel/admin-panel-layout";
 
 // Create a context for the admin status
 const AdminContext = createContext<boolean | null>(null);
@@ -19,7 +20,7 @@ export function useAdmin() {
 	return useContext(AdminContext);
 }
 
-export default function ClientLayout({
+export default function DashboardClientLayout({
 	children,
 }: Readonly<{
 	children: React.ReactNode;
@@ -42,23 +43,10 @@ export default function ClientLayout({
 				/>
 			</head>
 
-			<ClerkProvider
-				appearance={{
-					layout: {
-						logoImageUrl: "/nexus.png",
-					},
-					variables: {
-						colorText: "#fff",
-						colorPrimary: "#0156BD",
-						colorBackground: "#0A0A0A",
-					},
-					baseTheme: dark,
-				}}
-			>
+			
 				<body className={GeistSans.className}>
 					<AdminCheck>{children}</AdminCheck>
 				</body>
-			</ClerkProvider>
 		</html>
 	);
 }
@@ -104,7 +92,9 @@ function AdminCheck({ children }: { children: React.ReactNode }) {
 	return (
 		<ThemeProvider attribute="class" defaultTheme="system" enableSystem>
 		<AdminContext.Provider value={isAdmin}>
-		{children}
+		<AdminPanelLayout>
+			{children}
+			</AdminPanelLayout>
 			</AdminContext.Provider>
 		</ThemeProvider>
 	);
