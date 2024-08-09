@@ -13,7 +13,7 @@ import { motion } from "framer-motion";
 
 const LoaderWrapper = () => (
 	<div className='flex justify-center items-center h-full'>
-		<Loader className='loader-lg' />
+		<Loader light={false} large={true} />
 	</div>
 );
 
@@ -145,8 +145,8 @@ export default function CombinedSignIn() {
 															<Clerk.Loading>
 																{(isLoading) =>
 																	isLoading ? (
-																		<div className='ml-4'>
-																			<Loader />
+																		<div className='ml-4 flex justify-center items-center'>
+																			<Loader light={false} large={false} />
 																		</div>
 																	) : (
 																		<ChevronRight className='inline-flex justify-center items-center w-4 h-4 ml-2 group-hover:translate-x-1 duration-300' />
@@ -218,8 +218,8 @@ export default function CombinedSignIn() {
 																			</defs>
 																		</svg>
 																		{isLoading ? (
-																			<div className='ml-4'>
-																				<Loader />
+																			<div className='ml-4 flex justify-center items-center'>
+																				<Loader light={false} large={false} />
 																			</div>
 																		) : (
 																			`Continue with Google`
@@ -270,8 +270,8 @@ export default function CombinedSignIn() {
 																			</defs>
 																		</svg>
 																		{isLoading ? (
-																			<div className='ml-4'>
-																				<Loader />
+																			<div className='ml-4 flex justify-center items-center'>
+																				<Loader light={false} large={false} />
 																			</div>
 																		) : (
 																			`Continue with Github`
@@ -353,8 +353,8 @@ export default function CombinedSignIn() {
 																<Clerk.Loading>
 																	{(isLoading) =>
 																		isLoading ? (
-																			<div className='ml-4'>
-																				<Loader />
+																			<div className='ml-4 flex justify-center items-center'>
+																				<Loader light={false} large={false} />
 																			</div>
 																		) : (
 																			<ChevronRight className='inline-flex justify-center items-center w-4 h-4 ml-2 group-hover:translate-x-1 duration-300' />

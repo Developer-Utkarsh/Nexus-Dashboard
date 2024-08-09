@@ -79,8 +79,9 @@ function AdminCheck({ children }: { children: React.ReactNode }) {
 
 	if (loading) {
 		return (
-			<div className='bg-transparent dark:bg-black h-screen w-full flex justify-center items-center'>
-				<Loader className='loader-lg' />
+			<div className='bg-[#18181b] h-screen w-full flex justify-center items-center'>
+								<Loader light={false} large={true} />
+
 			</div>
 		);
 	}

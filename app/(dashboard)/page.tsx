@@ -8,14 +8,16 @@ import { useAdmin } from "../ClientLayout";
 export default function Home() {
 	const { user } = useUser();
 	const isAdmin = useAdmin();
+const theme = localStorage.getItem('theme') || "dark"
+
 	if (isAdmin === null) {
 		return (
-			<div className='bg-[#FAFAFA] dark:bg-black h-screen w-full flex justify-center items-center'>
-			<Loader className='loader-lg' />
-
+			<div className={` ${theme==="light"? "bg-[#FAFAFA]" : "bg-[#18181B]"} h-screen w-full flex justify-center items-center`}>
+		<Loader light={theme !== "dark"} large={true} />
 			</div>
 		);
 	}
+
 
 	// 	return (
 	// 		<div className='z-30 bg-black flex w-full h-screen justify-center items-center text-5xl text-white'>

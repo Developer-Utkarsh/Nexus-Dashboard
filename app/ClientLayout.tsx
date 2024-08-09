@@ -24,6 +24,7 @@ export default function ClientLayout({
 }: Readonly<{
 	children: React.ReactNode;
 }>) {
+
 	return (
 		<html lang='en'>
 			<head>
@@ -55,7 +56,7 @@ export default function ClientLayout({
 					baseTheme: dark,
 				}}
 			>
-				<body className={GeistSans.className}>
+				<body className={`${GeistSans.className} bg-[#18181B]`}>
 					<AdminCheck>{children}</AdminCheck>
 				</body>
 			</ClerkProvider>
@@ -91,8 +92,8 @@ function AdminCheck({ children }: { children: React.ReactNode }) {
 
 	if (loading) {
 		return (
-			<div className='bg-transparent dark:bg-black h-screen w-full flex justify-center items-center'>
-				<Loader className='loader-lg' />
+			<div className='bg-[#18181b] h-screen w-full flex justify-center items-center'>
+				<Loader light={false} large={true} />
 			</div>
 		);
 	}

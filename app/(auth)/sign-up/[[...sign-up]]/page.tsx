@@ -15,7 +15,7 @@ import { ChevronRight } from "lucide-react";
 
 const LoaderWrapper = () => (
 	<div className='flex justify-center items-center h-full'>
-		<Loader className='loader-lg' />
+				<Loader light={false} large={true} />
 	</div>
 );
 const fadeUpVariants = {
@@ -206,8 +206,8 @@ export default function SignUP() {
 															)}
 														>
 															{isLoading ? (
-																<div className='ml-4'>
-																	<Loader />
+																<div className='ml-4 flex justify-center items-center'>
+																	<Loader light={false} large={false} />
 																</div>
 															) : (
 																`Google`
@@ -287,8 +287,8 @@ export default function SignUP() {
 															)}
 														>
 															{isLoading ? (
-																<div className='ml-4'>
-																	<Loader />
+																<div className='ml-4 flex justify-center items-center' >
+																	<Loader light={false} large={false} />
 																</div>
 															) : (
 																`Github`
@@ -388,8 +388,8 @@ export default function SignUP() {
 											<Clerk.Loading>
 												{(isLoading) =>
 													isLoading ? (
-														<div className='ml-4'>
-															<Loader />
+														<div className='ml-4 flex justify-center items-center'>
+															<Loader light={false} large={false} />
 														</div>
 													) : (
 														<ChevronRight className='inline-flex justify-center items-center w-4 h-4 ml-2 group-hover:translate-x-1 duration-300' />
@@ -485,8 +485,8 @@ export default function SignUP() {
 												<Clerk.Loading>
 													{(isLoading) =>
 														isLoading ? (
-															<div className='ml-4'>
-																<Loader />
+															<div className='ml-4 flex justify-center items-center'>
+																<Loader light={false} large={false} />
 															</div>
 														) : (
 															<ChevronRight className='inline-flex justify-center items-center w-4 h-4 ml-2 group-hover:translate-x-1 duration-300' />
@@ -579,8 +579,8 @@ export default function SignUP() {
 											<Clerk.Loading>
 												{(isLoading) =>
 													isLoading ? (
-														<div className='ml-4'>
-															<Loader />
+														<div className='ml-4 flex justify-center items-center'>
+															<Loader light={false} large={false} />
 														</div>
 													) : (
 														<ChevronRight className='inline-flex justify-center items-center w-4 h-4 ml-2 group-hover:translate-x-1 duration-300' />
