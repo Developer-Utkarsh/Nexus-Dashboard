@@ -1,102 +1,91 @@
 "use client";
 
-import { ClerkProvider, useUser } from "@clerk/nextjs";
-import { useState, useEffect } from "react";
+import { useUser } from "@clerk/nextjs";
+import { useEffect } from "react";
 import axios from "axios";
 import Loader from "@/components/Loader";
 import NotAllowed from "@/components/NotAllowed";
-import { dark } from "@clerk/themes";
-import { GeistSans } from "geist/font/sans";
-import "../globals.css";
 import { ThemeProvider } from "@/providers/theme-provider";
 
 import { createContext, useContext } from "react";
 import AdminPanelLayout from "@/components/admin-panel/admin-panel-layout";
 
+import isAdminStore from "@/providers/store/isAdminState";
+import loadingStore from "@/providers/store/loadingState";
+
 // Create a context for the admin status
 const AdminContext = createContext<boolean | null>(null);
 
 export function useAdmin() {
-	return useContext(AdminContext);
+  return useContext(AdminContext);
 }
 
 export default function DashboardClientLayout({
-	children,
+  children,
 }: Readonly<{
-	children: React.ReactNode;
+  children: React.ReactNode;
 }>) {
-	return (
-		<html lang='en'>
-			<head>
-				<link
-					rel='stylesheet'
-					href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css'
-					integrity='sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=='
-					crossOrigin='anonymous'
-					referrerPolicy='no-referrer'
-				/>
-				<link rel='preconnect' href='https://fonts.googleapis.com' />
-				<link rel='preconnect' href='https://fonts.gstatic.com' />
-				<link
-					href='https://fonts.googleapis.com/css2?family=Michroma&display=swap'
-					rel='stylesheet'
-				/>
-			</head>
-
-			
-				<body className={GeistSans.className}>
-					<AdminCheck>{children}</AdminCheck>
-				</body>
-		</html>
-	);
+  return <AdminCheck>{children}</AdminCheck>;
 }
 
 function AdminCheck({ children }: { children: React.ReactNode }) {
-	const { user } = useUser();
-	const [loading, setLoading] = useState(true);
-	const [isAdmin, setIsAdmin] = useState<boolean | null>(null);
+  const { isAdmin, updateIsAdmin, apiRequestMade, setApiRequestMade } = isAdminStore();
+  const { loading, updateLoading } = loadingStore();
+  const { user } = useUser();
 
-	useEffect(() => {
-		const checkAdminStatus = async () => {
-			if (user?.emailAddresses[0]?.emailAddress) {
-				try {
-					const response = await axios.post("/api/", {
-						email: user.emailAddresses[0].emailAddress,
-					});
-					setIsAdmin(response.data.exists);
-				} catch (error) {
-					console.error("Error checking admin status:", error);
-				} finally {
-					setLoading(false);
-				}
-			} else {
-				setLoading(false);
-			}
-		};
+  // useEffect(() => {
+  //   const checkAdminStatus = async () => {
+  //     if (user?.emailAddresses[0]?.emailAddress && isAdmin === null && !apiRequestMade) {
+  //       updateLoading(true);
+  //       setApiRequestMade(true);
+  //       try {
+  //         const response = await axios.post("/api/", {
+  //           email: user.emailAddresses[0].emailAddress,
+  //         });
+  //         updateIsAdmin(response.data.exists);
+  //         updateLoading(false);
 
-		checkAdminStatus();
-	}, [user]);
+  //       } catch (error) {
+  //         console.error("Error checking admin status:", error);
+  //         updateIsAdmin(false);
+  //       } 
+  //     } else if (!user) {
+  //       updateLoading(false);
+  //     }
+  //   };
 
-	if (loading) {
-		return (
-			<div className='bg-[#18181b] h-screen w-full flex justify-center items-center'>
-								<Loader light={false} large={true} />
+  //   checkAdminStatus();
+  // }, [user, isAdmin, updateIsAdmin, updateLoading, apiRequestMade, setApiRequestMade]);
 
-			</div>
-		);
-	}
+  if (loading && isAdmin === null) {
+    return (
+      <div className='bg-[#18181b] h-screen w-full flex justify-center items-center'>
+        <Loader light={false} large={true} />
+      </div>
+    );
+  }
 
-	if (isAdmin === false) {
-		return <NotAllowed />;
-	}
+  if (isAdmin === false) {
+    return <NotAllowed />;
+  }
 
-	return (
-		<ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-		<AdminContext.Provider value={isAdmin}>
-		<AdminPanelLayout>
-			{children}
-			</AdminPanelLayout>
-			</AdminContext.Provider>
-		</ThemeProvider>
-	);
+  if (isAdmin === true) {
+    return (
+      <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+        <AdminContext.Provider value={isAdmin}>
+          <AdminPanelLayout>
+            {children}
+          </AdminPanelLayout>
+        </AdminContext.Provider>
+      </ThemeProvider>
+    );
+  }
+
+
+    return (
+      <div className='bg-[#18181b] h-screen w-full flex justify-center items-center'>
+        <Loader light={false} large={true} />
+      </div>
+    );
+  
 }
