@@ -3,6 +3,8 @@ import { MenuIcon, PanelsTopLeft } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Menu } from "@/components/admin-panel/menu";
+import { cn } from "@/lib/utils";
+
 import {
   Sheet,
   SheetHeader,
@@ -25,10 +27,16 @@ export function SheetMenu() {
             variant="link"
             asChild
           >
-            <Link href="/dashboard" className="flex items-center gap-2">
-              <PanelsTopLeft className="w-6 h-6 mr-1" />
-              <h1 className="font-bold text-lg">Brand</h1>
-            </Link>
+           <Link href="/" className="flex justify-start gap-2 items-center">
+            <Image src={"/nexus.png"}  width={24} alt="Nexus" height={12} className="dark:invert-0 dark:filter-none invert filter"/>
+            <h1
+              className={cn(
+                "font-bold text-xl whitespace-nowrap transition-[transform,opacity,display] ease-in-out duration-300"
+              )}
+            >
+            Nexus
+            </h1>
+          </Link>
           </Button>
         </SheetHeader>
         <Menu isOpen />

@@ -5,8 +5,8 @@ import { Card, CardContent } from "@/components/ui/card";
 
 export default function PlaceholderContent() {
   return (
-    <Card className="rounded-lg border-none mt-6">
-      <CardContent className="p-6">
+  <Card className="rounded-lg border-none mt-6 ">
+      <CardContent className="">
         <div className="flex justify-center items-center min-h-[calc(100vh-198px)]">
          
         </div>

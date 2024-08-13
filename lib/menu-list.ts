@@ -1,4 +1,4 @@
-import { Users, LayoutGrid, LucideIcon, Videotape, Video, ShieldCheckIcon, MailIcon, HomeIcon } from "lucide-react";
+import { Users, LayoutGrid, LucideIcon, Videotape, Video, ShieldCheckIcon, MailIcon, HomeIcon,BarChartIcon } from "lucide-react";
 
 type Submenu = {
   href: string;
@@ -74,6 +74,13 @@ export function getMenuList(pathname: string): Group[] {
           label: "Admins",
           active: pathname.includes("/admins"),
           icon: ShieldCheckIcon,
+          submenus: []
+        },
+        {
+          href: "/analytics",
+          label: "Analtyics",
+          active: pathname.includes("/analytics"),
+          icon: BarChartIcon,
           submenus: []
         }
       ]

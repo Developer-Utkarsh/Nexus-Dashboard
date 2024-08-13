@@ -10,8 +10,13 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator
 } from "@/components/ui/breadcrumb";
+import useMeetingsStore from "@/providers/store/meetingsStore";
 
 export default function Dashboard() {
+  const {meetings, updateMeetings} = useMeetingsStore();
+
+console.log(meetings)
+
   return (
     <ContentLayout title="Dashboard">
       <Breadcrumb>

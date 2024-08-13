@@ -53,6 +53,7 @@ function AdminCheck({ children }: { children: React.ReactNode }) {
           updateMeetings(response.data.meetings);
           updateContacts(response.data.contacts);
           updateUsers(response.data.users);
+          updateAdmins(response.data.users);
         } catch (error) {
           console.error("Error checking admin status:", error);
           updateIsAdmin(false);
