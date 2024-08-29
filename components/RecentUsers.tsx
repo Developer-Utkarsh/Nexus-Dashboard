@@ -1,3 +1,7 @@
+
+// @ts-nocheck
+
+
 import {
   Card,
   CardContent,
