@@ -34,7 +34,7 @@ import {
     return (
       <Card className="max-sm:px-0 max-sm:py-2 py-4 w-full">
               <CardHeader className="pt-2 sm:pb-2">
-                <CardTitle className="sm:ml-2 text-2xl max-sm:text-xl">Recent Meetings</CardTitle>
+                <CardTitle className=" text-2xl max-sm:text-xl">Recent Meetings</CardTitle>
               </CardHeader>
               <CardContent className="grid gap-0 mt-0 w-full px-4 max-sm:px-2 pb-0">
                 {meetings.slice(-7).reverse().map((meeting:any, index:any) => (

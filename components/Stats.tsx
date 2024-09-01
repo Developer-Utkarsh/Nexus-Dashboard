@@ -32,7 +32,7 @@ const Stats = () => {
   }).length;
   return (
     <div className="grid gap-4 md:grid-cols-2 md:gap-8 lg:grid-cols-4">
-            <Card>
+            <Card className="dark:hover:bg-zinc-900 hover:bg-zinc-50">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-sm font-medium">
                   Total Users
@@ -46,7 +46,7 @@ const Stats = () => {
                 </p>
               </CardContent>
             </Card>
-            <Card>
+            <Card className="dark:hover:bg-zinc-900 hover:bg-zinc-50">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-sm font-medium">
                   Total Meetings
@@ -60,7 +60,7 @@ const Stats = () => {
                 </p>
               </CardContent>
             </Card>
-            <Card>
+            <Card className="dark:hover:bg-zinc-900 hover:bg-zinc-50">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-sm font-medium">Contacts</CardTitle>
                 <Mail className="h-4 w-4 text-muted-foreground" />
@@ -72,7 +72,7 @@ const Stats = () => {
                 </p>
               </CardContent>
             </Card>
-            <Card>
+            <Card className="dark:hover:bg-zinc-900 hover:bg-zinc-50">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className="text-sm font-medium">Public Meetings</CardTitle>
                 <Videotape className="h-4 w-4 text-muted-foreground" />
