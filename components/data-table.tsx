@@ -45,6 +45,7 @@ export function DataTable<TData, TValue>({
   const [globalFilter, setGlobalFilter] = React.useState("")
 
   const isUserTable = forProp === "user"
+  const isMeetingTable = forProp === "meeting"
 
   const table = useReactTable({
     data,
@@ -58,19 +59,28 @@ export function DataTable<TData, TValue>({
     onColumnVisibilityChange: setColumnVisibility,
     onGlobalFilterChange: setGlobalFilter,
     globalFilterFn: (row, columnId, filterValue) => {
-      if (!isUserTable) return true; // If not a user table, don't filter
-
       const searchValue = filterValue.toLowerCase();
-      const user = row.original as any; // Type assertion to access properties
+      const rowData = row.original as any; // Type assertion to access properties
 
-      // Search in username, email, firstName, and lastName
-      return (
-        user.username?.toLowerCase().includes(searchValue) ||
-        user.email?.toLowerCase().includes(searchValue) ||
-        user.firstName?.toLowerCase().includes(searchValue) ||
-        user.lastName?.toLowerCase().includes(searchValue) ||
-        `${user.firstName} ${user.lastName}`.toLowerCase().includes(searchValue)
-      );
+      if (isUserTable) {
+        return (
+          rowData.username?.toLowerCase().includes(searchValue) ||
+          rowData.email?.toLowerCase().includes(searchValue) ||
+          rowData.firstName?.toLowerCase().includes(searchValue) ||
+          rowData.lastName?.toLowerCase().includes(searchValue) ||
+          `${rowData.firstName} ${rowData.lastName}`.toLowerCase().includes(searchValue)
+        );
+      } else if (isMeetingTable) {
+        const titleMatch = rowData.title?.toLowerCase().includes(searchValue);
+        const creatorMatch = rowData.createdBy?.toLowerCase().includes(searchValue);
+        const userMatch = rowData.totalUsers?.some((user: any) =>
+          user.fullName?.toLowerCase().includes(searchValue) ||
+          user.username?.toLowerCase().includes(searchValue)
+        );
+        return titleMatch || creatorMatch || userMatch;
+      }
+
+      return true; // If not a user or meeting table, don't filter
     },
     state: {
       sorting,
@@ -82,10 +92,10 @@ export function DataTable<TData, TValue>({
 
   return (
     <div>
-      {isUserTable && (
+      {(isUserTable || isMeetingTable) && (
         <div className="flex items-center py-4">
           <Input
-            placeholder="Search users..."
+            placeholder={isUserTable ? "Search users..." : "Search meetings..."}
             value={globalFilter}
             onChange={(event) => setGlobalFilter(event.target.value)}
             className="max-w-sm"
