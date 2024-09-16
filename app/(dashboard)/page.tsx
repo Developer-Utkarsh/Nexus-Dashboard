@@ -5,6 +5,8 @@ import Loader from "@/components/Loader";
 import Dashboard from "@/components/Home";
 import { useAdmin } from "../ClientLayout";
 
+
+
 export default function Home() {
 	const { user } = useUser();
 	const isAdmin = useAdmin();

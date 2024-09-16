@@ -16,6 +16,7 @@ export default function AdminPanelLayout({
 
   return (
     <>
+    
       <Sidebar />
       <main
         className={cn(
